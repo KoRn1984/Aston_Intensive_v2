@@ -9,8 +9,8 @@ public class ExampleHashMap {
 
         // добавляем элементы в CustomHashMap
         hashMap.put("key1", "value1");
-        //hashMap.put("key2", "value2");
-        //hashMap.put("key3", "value3");
+        hashMap.put("key2", "value2");
+        hashMap.put("key3", "value3");
         System.out.println("CustomHashMap после добавления элементов: " + hashMap);
 
         // получаем значение из CustomHashMap по ключу key2
