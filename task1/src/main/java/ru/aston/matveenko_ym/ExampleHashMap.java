@@ -17,7 +17,7 @@ public class ExampleHashMap {
         System.out.println("Значение по ключу key2: " + hashMap.get("key2"));
 
         // удаляем элемент из CustomHashMap по ключу key2
-        hashMap.remove("key4");
+        hashMap.remove("key2");
         System.out.println("CustomHashMap после удаления key2: " + hashMap);
 
         // выводим размер CustomHashMap
