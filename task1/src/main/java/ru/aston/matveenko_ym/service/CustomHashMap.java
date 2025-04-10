@@ -68,20 +68,19 @@ public class CustomHashMap<K, V> {
     }
 
     // метод для удаления элемента в CustomHashMap
-    public boolean remove(K key) {
+    public void remove(K key) {
         int index = hash(key);
         if (buckets[index] == null) {
-            return false; // ключ не найден
+            return; // ключ не найден
         }
         // ищем и удаляем узел с заданным ключом
         for (Node<K, V> node : buckets[index]) {
             if (node.key.equals(key)) {
                 buckets[index].remove(node);
                 size--;
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     // метод для получения текущего размера CustomHashMap
