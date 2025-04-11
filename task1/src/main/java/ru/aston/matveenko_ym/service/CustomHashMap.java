@@ -19,8 +19,8 @@ public class CustomHashMap<K, V> {
         }
     }
 
-    private final LinkedList<Node<K, V>>[] buckets; // массив цепочек в CustomHashMap
-    private final int capacity; // вместимость CustomHashMap
+    private LinkedList<Node<K, V>>[] buckets; // массив цепочек в CustomHashMap
+    private int capacity; // вместимость CustomHashMap
     private int size; // количество элементов в CustomHashMap
 
     public CustomHashMap(int capacity) {
@@ -68,19 +68,121 @@ public class CustomHashMap<K, V> {
     }
 
     // метод для удаления элемента в CustomHashMap
-    public void remove(K key) {
+    public boolean remove(K key) {
         int index = hash(key);
         if (buckets[index] == null) {
-            return; // ключ не найден
+            return false;
         }
-        // ищем и удаляем узел с заданным ключом
         for (Node<K, V> node : buckets[index]) {
             if (node.key.equals(key)) {
                 buckets[index].remove(node);
                 size--;
-                return;
+                return true;
             }
         }
+        return false;
+    }
+
+    // проверка наличия ключа в CustomHashMap
+    public boolean containsKey(K key) {
+        int index = hash(key);
+        if (buckets[index] == null) {
+            return false;
+        }
+        for (Node<K, V> node : buckets[index]) {
+            if (node.key.equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // проверка наличия значения в CustomHashMap
+    public boolean containsValue(V value) {
+        for (LinkedList<Node<K, V>> bucket : buckets) {
+            if (bucket != null) {
+                for (Node<K, V> node : bucket) {
+                    if (node.value.equals(value)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // очистка CustomHashMap
+    public void clear() {
+        for (int i = 0; i < capacity; i++) {
+            buckets[i] = null;
+        }
+        size = 0;
+    }
+
+    // проверка, пустая ли CustomHashMap
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // получение всех ключей из CustomHashMap
+    public LinkedList<K> keys() {
+        LinkedList<K> keys = new LinkedList<>();
+        for (LinkedList<Node<K, V>> bucket : buckets) {
+            if (bucket != null) {
+                for (Node<K, V> node : bucket) {
+                    keys.add(node.key);
+                }
+            }
+        }
+        return keys;
+    }
+
+    // получение всех значений из CustomHashMap
+    public LinkedList<V> values() {
+        LinkedList<V> values = new LinkedList<>();
+        for (LinkedList<Node<K, V>> bucket : buckets) {
+            if (bucket != null) {
+                for (Node<K, V> node : bucket) {
+                    values.add(node.value);
+                }
+            }
+        }
+        return values;
+    }
+
+    // увеличение размера CustomHashMap и перераспределение элементов, если нагрузка становится слишком высокой
+    private void resize() {
+        int newCapacity = capacity * 2;
+        LinkedList<Node<K, V>>[] newBuckets = new LinkedList[newCapacity];
+        for (LinkedList<Node<K, V>> bucket : buckets) {
+            if (bucket != null) {
+                for (Node<K, V> node : bucket) {
+                    int newIndex = Math.abs(node.key.hashCode()) % newCapacity;
+                    if (newBuckets[newIndex] == null) {
+                        newBuckets[newIndex] = new LinkedList<>();
+                    }
+                    newBuckets[newIndex].add(new Node<>(node.key, node.value));
+                }
+            }
+        }
+        buckets = newBuckets;
+        capacity = newCapacity;
+    }
+
+    // вычисление коэффициента загрузки CustomHashMap
+    public double loadFactor() {
+        return (double) size / capacity;
+    }
+
+    // получение всех пар ключ-значение из CustomHashMap
+    public LinkedList<Node<K, V>> entrySet() {
+        LinkedList<Node<K, V>> entries = new LinkedList<>();
+        for (LinkedList<Node<K, V>> bucket : buckets) {
+            if (bucket != null) {
+                entries.addAll(bucket);
+            }
+        }
+        return entries;
     }
 
     // метод для получения текущего размера CustomHashMap
