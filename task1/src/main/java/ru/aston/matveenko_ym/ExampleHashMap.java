@@ -2,14 +2,10 @@ package ru.aston.matveenko_ym;
 
 import ru.aston.matveenko_ym.service.CustomHashMap;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ExampleHashMap {
 
     public static void main(String[] args) {
         CustomHashMap<String, String> hashMap = new CustomHashMap<>(16);
-        Map<String, String> hm = new HashMap<>();
 
         // добавляем элементы в CustomHashMap
         hashMap.put("key1", "value1");
