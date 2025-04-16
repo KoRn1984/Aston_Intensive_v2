@@ -69,7 +69,7 @@ public class UserService {
                         userToUpdate.setAge(scanner.nextInt());
                         userDao.updateUser(userToUpdate);
                     } else {
-                        System.out.println("User not found!");
+                        logger.error("User not found!");
                     }
                     break;
 
@@ -86,7 +86,7 @@ public class UserService {
                     return;
 
                 default:
-                    System.out.println("Invalid option!");
+                    logger.error("Invalid option!");
             }
         }
     }
