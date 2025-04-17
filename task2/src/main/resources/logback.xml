@@ -23,12 +23,12 @@
 
     <!-- Уровень логирования по умолчанию -->
     <root level="info">
-        <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
 
     <!-- Настройка уровня логирования для Hibernate -->
-    <logger name="org.hibernate" level="warn" />
-    <logger name="org.hibernate.SQL" level="debug" />
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace" />
+    <logger name="org.hibernate" level="warn"/>
+    <logger name="org.hibernate.SQL" level="debug"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="trace"/>
 </configuration>
