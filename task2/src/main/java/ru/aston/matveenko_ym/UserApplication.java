@@ -1,15 +1,15 @@
 package ru.aston.matveenko_ym;
 
-import ru.aston.matveenko_ym.service.UserService;
+import ru.aston.matveenko_ym.service.Impl.UserServiceImpl;
 
 public class UserApplication {
-    UserService userService;
+    UserServiceImpl userServiceImpl;
 
     {
-        userService = new UserService();
+        userServiceImpl = new UserServiceImpl();
     }
 
     public static void main(String[] args) {
-        new UserService().runApplication();
+        new UserServiceImpl().runApplication();
     }
 }
