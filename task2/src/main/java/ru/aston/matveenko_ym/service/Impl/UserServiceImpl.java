@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
         this.scanner = new Scanner(System.in);
     }
 
+    public UserServiceImpl(UserDao userDao, Scanner scanner) {
+        this.userDao = userDao;
+        this.scanner = scanner;
+    }
+
     public void runApplication() {
         logger.info("Application started!");
         while (true) {
@@ -109,7 +114,7 @@ public class UserServiceImpl implements UserService {
         logger.info("Application finished!");
     }
 
-    private int getUserInputInt(String prompt) {
+    public int getUserInputInt(String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
@@ -121,7 +126,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private Long getUserInputLong(String prompt) {
+    public Long getUserInputLong(String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);

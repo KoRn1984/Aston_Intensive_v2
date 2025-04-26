@@ -8,11 +8,11 @@
 
     <!-- Файловый вывод логов -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/user-service.log</file>
+        <file>logs/test-user-service.log</file>
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- Архивируем логи ежедневно -->
-            <fileNamePattern>logs/user-service-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/test-user-service-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- Храним архивы логов 30 дней -->
             <maxHistory>30</maxHistory>
         </rollingPolicy>
