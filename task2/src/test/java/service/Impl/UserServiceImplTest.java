@@ -124,9 +124,7 @@ public class UserServiceImplTest {
         when(scanner.nextLong()).thenReturn(userId);
         doThrow(new IllegalArgumentException("User with ID " + userId + " does not exist!"))
                 .when(userDao).deleteUser(userId);
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            userService.deleteUser();
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> userService.deleteUser());
         assertEquals("User with ID 999 does not exist!", exception.getMessage());
         verify(userDao).deleteUser(userId);
     }
