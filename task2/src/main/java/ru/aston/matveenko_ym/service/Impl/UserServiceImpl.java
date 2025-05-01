@@ -6,6 +6,7 @@ import ru.aston.matveenko_ym.dao.UserDao;
 import ru.aston.matveenko_ym.model.User;
 import ru.aston.matveenko_ym.service.UserService;
 import ru.aston.matveenko_ym.util.HibernateUtil;
+import ru.aston.matveenko_ym.validation.ValidationUser;
 
 import java.util.List;
 import java.util.Scanner;
@@ -65,10 +66,28 @@ public class UserServiceImpl implements UserService {
     }
 
     public void createUser() {
-        System.out.print("Enter name: ");
-        String name = scanner.next();
-        System.out.print("Enter email: ");
-        String email = scanner.next();
+        String name;
+        while (true) {
+            System.out.print("Enter name: ");
+            name = scanner.next();
+            try {
+                ValidationUser.validateName(name);
+                break;
+            } catch (IllegalArgumentException e) {
+                logger.error(e.getMessage());
+            }
+        }
+        String email;
+        while (true) {
+            System.out.print("Enter email: ");
+            email = scanner.next();
+            try {
+                ValidationUser.validateEmail(email);
+                break;
+            } catch (IllegalArgumentException e) {
+                logger.error(e.getMessage());
+            }
+        }
         int age = getUserInputInt("Enter age: ");
         User newUser = new User();
         newUser.setName(name);
@@ -92,10 +111,30 @@ public class UserServiceImpl implements UserService {
         Long userId = getUserInputLong("Enter user ID: ");
         User userToUpdate = userDao.getUserById(userId);
         if (userToUpdate != null) {
-            System.out.print("Enter new name: ");
-            userToUpdate.setName(scanner.next());
-            System.out.print("Enter new email: ");
-            userToUpdate.setEmail(scanner.next());
+            String newName;
+            while (true) {
+                System.out.print("Enter new name: ");
+                newName = scanner.next();
+                try {
+                    ValidationUser.validateName(newName);
+                    break;
+                } catch (IllegalArgumentException e) {
+                    logger.error(e.getMessage());
+                }
+            }
+            userToUpdate.setName(newName);
+            String newEmail;
+            while (true) {
+                System.out.print("Enter new email: ");
+                newEmail = scanner.next();
+                try {
+                    ValidationUser.validateEmail(newEmail);
+                    break;
+                } catch (IllegalArgumentException e) {
+                    logger.error(e.getMessage());
+                }
+            }
+            userToUpdate.setEmail(newEmail);
             userToUpdate.setAge(getUserInputInt("Enter new age: "));
             userDao.updateUser(userToUpdate);
         } else {

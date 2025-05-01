@@ -12,7 +12,7 @@
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- Архивируем логи ежедневно -->
-            <fileNamePattern>logs/test-user-service-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>test-user-service-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- Храним архивы логов 30 дней -->
             <maxHistory>30</maxHistory>
         </rollingPolicy>
