@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -98,10 +102,32 @@ public class UserServiceImplTest {
     }
 
     @Test
+    void testUpdateNonexistentUser() {
+        Long userId = 999L;
+        when(scanner.nextLong()).thenReturn(userId);
+        when(userDao.getUserById(userId)).thenReturn(null);
+        userService.updateUser();
+        verify(userDao, never()).updateUser(any(User.class));
+    }
+
+    @Test
     void testDeleteUser() {
         Long userId = 1L;
         when(scanner.nextLong()).thenReturn(userId);
         userService.deleteUser();
+        verify(userDao).deleteUser(userId);
+    }
+
+    @Test
+    void testDeleteNonexistentUser() {
+        Long userId = 999L;
+        when(scanner.nextLong()).thenReturn(userId);
+        doThrow(new IllegalArgumentException("User with ID " + userId + " does not exist!"))
+                .when(userDao).deleteUser(userId);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            userService.deleteUser();
+        });
+        assertEquals("User with ID 999 does not exist!", exception.getMessage());
         verify(userDao).deleteUser(userId);
     }
 }

@@ -53,6 +53,10 @@ public class UserDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+            User existingUser = session.get(User.class, user.getId());
+            if (existingUser == null) {
+                throw new IllegalArgumentException("User with ID " + user.getId() + " does not exist!");
+            }
             session.merge(user);
             transaction.commit();
             logger.info("User updated successfully: {}", user);
@@ -73,7 +77,7 @@ public class UserDao {
                 session.remove(user);
                 logger.info("User deleted successfully: {}", user);
             } else {
-                logger.warn("User with ID {} not found for deletion!", id);
+                throw new IllegalArgumentException("User with ID " + id + " does not exist!");
             }
             transaction.commit();
         } catch (Exception e) {

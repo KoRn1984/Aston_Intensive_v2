@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class UserDaoTest extends AbstractTestContainer {
-
     private final UserDao userDao = new UserDao();
 
     @BeforeEach
