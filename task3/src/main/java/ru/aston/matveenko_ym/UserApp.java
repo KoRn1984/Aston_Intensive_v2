@@ -1,6 +1,6 @@
 package ru.aston.matveenko_ym;
 
-public class Main {
+public class UserApp {
     public static void main(String[] args) {
     }
 }
