@@ -65,7 +65,6 @@ public class UserService {
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
         user.setAge(dto.getAge());
-        // `createdAt` устанавливается автоматически благодаря Hibernate
         return user;
     }
 }

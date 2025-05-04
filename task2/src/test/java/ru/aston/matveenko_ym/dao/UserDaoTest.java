@@ -2,7 +2,6 @@ package ru.aston.matveenko_ym.dao;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.aston.matveenko_ym.UserDao;
 import ru.aston.matveenko_ym.model.User;
 import ru.aston.matveenko_ym.util.HibernateUtil;
 import ru.aston.matveenko_ym.util.AbstractTestContainer;

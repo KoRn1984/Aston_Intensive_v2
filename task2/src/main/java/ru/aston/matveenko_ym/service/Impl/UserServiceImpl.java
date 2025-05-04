@@ -2,7 +2,7 @@ package ru.aston.matveenko_ym.service.Impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.aston.matveenko_ym.UserDao;
+import ru.aston.matveenko_ym.dao.UserDao;
 import ru.aston.matveenko_ym.model.User;
 import ru.aston.matveenko_ym.service.UserService;
 import ru.aston.matveenko_ym.util.HibernateUtil;

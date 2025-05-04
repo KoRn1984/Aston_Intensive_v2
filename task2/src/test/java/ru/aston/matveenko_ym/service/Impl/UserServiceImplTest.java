@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import ru.aston.matveenko_ym.UserDao;
+import ru.aston.matveenko_ym.dao.UserDao;
 import ru.aston.matveenko_ym.model.User;
 
 import java.util.Arrays;
