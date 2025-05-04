@@ -1,13 +1,12 @@
-package service.Impl;
+package ru.aston.matveenko_ym.service.Impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import ru.aston.matveenko_ym.dao.UserDao;
+import ru.aston.matveenko_ym.UserDao;
 import ru.aston.matveenko_ym.model.User;
-import ru.aston.matveenko_ym.service.Impl.UserServiceImpl;
 
 import java.util.Arrays;
 import java.util.List;

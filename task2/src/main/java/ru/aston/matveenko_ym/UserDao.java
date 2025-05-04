@@ -1,4 +1,4 @@
-package ru.aston.matveenko_ym.dao;
+package ru.aston.matveenko_ym;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
