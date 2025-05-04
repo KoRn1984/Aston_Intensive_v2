@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.aston.matveenko_ym.dto.UserDto;
-import ru.aston.matveenko_ym.service.UserService;
+import ru.aston.matveenko_ym.service.Impl.UserServiceImpl;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,9 +28,9 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
