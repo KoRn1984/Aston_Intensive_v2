@@ -38,13 +38,4 @@ class NotificationServiceTest {
                 .sendEmail(eq("john.doe@example.com"), eq("Аккаунт удалён"),
                         eq("Здравствуйте! Ваш аккаунт был удалён."));
     }
-
-//    @Test
-//    void testConsumeMessage() {
-//        notificationService.consume("create:test@example.com");
-//
-//        verify(emailService, times(1))
-//                .sendEmail(eq("test@example.com"), eq("Аккаунт создан"),
-//                        eq("Здравствуйте! Ваш аккаунт на сайте был успешно создан."));
-//    }
 }
