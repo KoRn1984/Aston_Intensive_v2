@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
@@ -21,21 +20,21 @@ class NotificationServiceTest {
 
     @Test
     void testConsumeCreateEvent() {
-        String message = "create:john.doe@example.com";
+        String message = "create:test@example.com";
         notificationService.consume(message);
 
         verify(emailService, times(1))
-                .sendEmail(eq("john.doe@example.com"), eq("Аккаунт создан"),
+                .sendEmail(eq("test@example.com"), eq("Аккаунт создан"),
                         eq("Здравствуйте! Ваш аккаунт на сайте был успешно создан."));
     }
 
     @Test
     void testConsumeDeleteEvent() {
-        String message = "delete:john.doe@example.com";
+        String message = "delete:test@example.com";
         notificationService.consume(message);
 
         verify(emailService, times(1))
-                .sendEmail(eq("john.doe@example.com"), eq("Аккаунт удалён"),
+                .sendEmail(eq("test@example.com"), eq("Аккаунт удалён"),
                         eq("Здравствуйте! Ваш аккаунт был удалён."));
     }
 }

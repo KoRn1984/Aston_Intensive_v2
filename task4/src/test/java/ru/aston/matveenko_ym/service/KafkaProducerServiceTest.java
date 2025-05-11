@@ -13,6 +13,5 @@ class KafkaProducerServiceTest {
     @Test
     void testSendMessage() {
         kafkaProducerService.sendMessage("user-events", "create:test@example.com");
-        // Убедитесь, что сообщение отправлено (например, через консоль Kafka)
     }
 }
