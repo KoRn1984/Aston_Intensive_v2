@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @Operation(summary = "Добавление пользователя", description = "Позволяет добавить пользователя в сервис")
-    @PostMapping("/user")
+    @PostMapping("/user/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) throws URISyntaxException {
         UserDto createdUser = userService.createUser(userDto);
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @Operation(summary = "Редактирование пользователя по ID", description = "Позволяет отредактировать пользователя в сервисе")
-    @PutMapping("/user/{id}")
+    @PutMapping("/user/update/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
         UserDto updatedUser = userService.updateUser(id, userDto);
@@ -68,7 +68,7 @@ public class UserController {
     }
 
     @Operation(summary = "Удаление пользователя по ID", description = "Позволяет удалить пользователя в сервисе")
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/user/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
