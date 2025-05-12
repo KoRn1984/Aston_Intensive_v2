@@ -2,10 +2,15 @@ package ru.aston.matveenko_ym.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.aston.matveenko_ym.dto.EmailRequest;
 import ru.aston.matveenko_ym.service.EmailService;
 
 @RestController
@@ -20,12 +25,14 @@ public class NotificationController {
     }
 
     @PostMapping("/send")
-    public String sendEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String text) {
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
         try {
-            emailService.sendEmail(to, subject, text);
+            emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
+            return ResponseEntity.ok("Email sent successfully!");
         } catch (Exception exception) {
             log.error("Error sending email: {}", exception.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send email!");
         }
-        return "Email sent successfully!";
     }
 }
