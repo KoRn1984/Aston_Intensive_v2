@@ -65,7 +65,7 @@ class UserControllerTest {
 
         when(userService.createUser(any(UserDto.class))).thenReturn(user);
 
-        mockMvc.perform(post("/api/v1/user")
+        mockMvc.perform(post("/api/v1/user/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isCreated())
@@ -113,7 +113,7 @@ class UserControllerTest {
 
         when(userService.updateUser(eq(1L), any(UserDto.class))).thenReturn(updatedUser);
 
-        mockMvc.perform(put("/api/v1/user/1")
+        mockMvc.perform(put("/api/v1/user/update/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedUser)))
                 .andExpect(status().isOk())
@@ -126,7 +126,7 @@ class UserControllerTest {
 
     @Test
     void testDeleteUser() throws Exception {
-        mockMvc.perform(delete("/api/v1/user/1"))
+        mockMvc.perform(delete("/api/v1/user/delete/1"))
                 .andExpect(status().isNoContent());
     }
 }

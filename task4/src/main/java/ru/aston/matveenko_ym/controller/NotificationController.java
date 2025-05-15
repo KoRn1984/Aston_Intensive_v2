@@ -5,12 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.aston.matveenko_ym.dto.EmailRequest;
 import ru.aston.matveenko_ym.service.EmailService;
 
 @RestController
@@ -26,9 +24,9 @@ public class NotificationController {
 
     @PostMapping("/send")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
+    public ResponseEntity<String> sendEmail(@RequestParam String email, @RequestParam String message) {
         try {
-            emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
+            emailService.sendEmail(email, message);
             return ResponseEntity.ok("Email sent successfully!");
         } catch (Exception exception) {
             log.error("Error sending email: {}", exception.getMessage());
