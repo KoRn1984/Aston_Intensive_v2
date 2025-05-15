@@ -16,9 +16,9 @@ public class EmailService {
     public void sendEmail(String to, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        message.setSubject("Уведомление от user-service");
+        message.setSubject("Уведомление от службы поддержки пользователей");
         message.setText(body);
-        message.setFrom("u.matveenko1984@gmail.com");
+        message.setFrom("user-service@gmail.com");
         mailSender.send(message);
     }
 }
