@@ -23,7 +23,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-@Tag(name = "User Controller", description = "Пользователи")
+@Tag(name = "User Controller", description = "Управление пользователями")
 @Log4j2
 @RestController
 @RequestMapping("/api/v1")
@@ -35,7 +35,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Operation(summary = "Вывод всех пользователей", description = "Позволяет вывести весь список пользователей")
+    @Operation(summary = "Вывод всех пользователей", description = "Позволяет получить полный список пользователей")
     @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserDto>> getAllUsers() {
@@ -53,7 +53,7 @@ public class UserController {
         return ResponseEntity.ok().body(userDto);
     }
 
-    @Operation(summary = "Добавление пользователя", description = "Позволяет добавить пользователя в сервис")
+    @Operation(summary = "Добавление пользователя", description = "Позволяет добавить нового пользователя")
     @PostMapping("/user/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserDto> createUser(
@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @Operation(summary = "Редактирование пользователя по ID",
-            description = "Позволяет отредактировать пользователя в сервисе")
+            description = "Позволяет отредактировать существующего пользователя")
     @PutMapping("/user/update/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<UserDto> updateUser(
@@ -76,7 +76,8 @@ public class UserController {
         return ResponseEntity.ok().body(updatedUser);
     }
 
-    @Operation(summary = "Удаление пользователя по ID", description = "Позволяет удалить пользователя в сервисе")
+    @Operation(summary = "Удаление пользователя по ID",
+            description = "Позволяет удалить пользователя по его идентификатору")
     @DeleteMapping("/user/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteUser(@PathVariable @Parameter(description = "ID пользователя") Long id) {
