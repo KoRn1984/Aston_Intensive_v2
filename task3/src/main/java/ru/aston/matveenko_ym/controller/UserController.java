@@ -39,7 +39,9 @@ public class UserController {
     @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<UserDto>> getAllUsers() {
-        return ResponseEntity.ok().body(userService.getAllUsers());
+        List<UserDto> users = userService.getAllUsers();
+        log.info("Fetched all users, count: {}", users.size());
+        return ResponseEntity.ok().body(users);
     }
 
     @Operation(summary = "Поиск пользователя по ID", description = "Позволяет найти пользователя по его идентификатору")
@@ -47,6 +49,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<UserDto> getUserById(@PathVariable @Parameter(description = "ID пользователя") Long id) {
         UserDto userDto = userService.getUserById(id);
+        log.info("Fetched user with ID: {}", id);
         return ResponseEntity.ok().body(userDto);
     }
 
@@ -57,7 +60,7 @@ public class UserController {
             @Valid @RequestBody @Parameter(description = "Данные пользователя") UserDto userDto)
             throws URISyntaxException {
         UserDto createdUser = userService.createUser(userDto);
-        log.info("User created!");
+        log.info("User created with ID: {}!", createdUser.getId());
         return ResponseEntity.created(URI.create("/api/v1/users/" + createdUser.getId())).body(createdUser);
     }
 
@@ -69,7 +72,7 @@ public class UserController {
             @PathVariable @Parameter(description = "ID пользователя") Long id,
             @Valid @RequestBody @Parameter(description = "Данные пользователя") UserDto userDto) {
         UserDto updatedUser = userService.updateUser(id, userDto);
-        log.info("User edited!");
+        log.info("User updated with ID: {}!", id);
         return ResponseEntity.ok().body(updatedUser);
     }
 
@@ -78,7 +81,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteUser(@PathVariable @Parameter(description = "ID пользователя") Long id) {
         userService.deleteUser(id);
-        log.info("User deleted!");
+        log.info("User deleted with ID: {}!", id);
         return ResponseEntity.noContent().build();
     }
 }
