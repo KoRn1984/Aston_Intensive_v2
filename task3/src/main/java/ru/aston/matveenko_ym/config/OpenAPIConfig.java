@@ -3,11 +3,14 @@ package ru.aston.matveenko_ym.config;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "User Service Api",
-                description = "User management service", version = "2.0.2",
+                title = "User Service API",
+                description = "User management service",
+                version = "2.0.1",
                 contact = @Contact(
                         name = "Matveenko Yury",
                         email = "korn1984@narod.ru",
@@ -15,5 +18,5 @@ import io.swagger.v3.oas.annotations.info.Info;
                 )
         )
 )
-public class OpenApiConfig {
+public class OpenAPIConfig {
 }

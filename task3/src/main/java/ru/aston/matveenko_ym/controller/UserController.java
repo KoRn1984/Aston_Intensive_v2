@@ -1,6 +1,7 @@
 package ru.aston.matveenko_ym.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
@@ -44,7 +45,7 @@ public class UserController {
     @Operation(summary = "Поиск пользователя по ID", description = "Позволяет найти пользователя по его идентификатору")
     @GetMapping("/user/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable @Parameter(description = "ID пользователя") Long id) {
         UserDto userDto = userService.getUserById(id);
         return ResponseEntity.ok().body(userDto);
     }
@@ -52,16 +53,21 @@ public class UserController {
     @Operation(summary = "Добавление пользователя", description = "Позволяет добавить пользователя в сервис")
     @PostMapping("/user/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) throws URISyntaxException {
+    public ResponseEntity<UserDto> createUser(
+            @Valid @RequestBody @Parameter(description = "Данные пользователя") UserDto userDto)
+            throws URISyntaxException {
         UserDto createdUser = userService.createUser(userDto);
         log.info("User created!");
         return ResponseEntity.created(URI.create("/api/v1/users/" + createdUser.getId())).body(createdUser);
     }
 
-    @Operation(summary = "Редактирование пользователя по ID", description = "Позволяет отредактировать пользователя в сервисе")
+    @Operation(summary = "Редактирование пользователя по ID",
+            description = "Позволяет отредактировать пользователя в сервисе")
     @PutMapping("/user/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> updateUser(
+            @PathVariable @Parameter(description = "ID пользователя") Long id,
+            @Valid @RequestBody @Parameter(description = "Данные пользователя") UserDto userDto) {
         UserDto updatedUser = userService.updateUser(id, userDto);
         log.info("User edited!");
         return ResponseEntity.ok().body(updatedUser);
@@ -70,7 +76,7 @@ public class UserController {
     @Operation(summary = "Удаление пользователя по ID", description = "Позволяет удалить пользователя в сервисе")
     @DeleteMapping("/user/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable @Parameter(description = "ID пользователя") Long id) {
         userService.deleteUser(id);
         log.info("User deleted!");
         return ResponseEntity.noContent().build();
